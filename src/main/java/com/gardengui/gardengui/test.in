@@ -1,0 +1,29 @@
+rows: 7
+cols: 7
+delay: .5
+
+PLANT (0,0) sunflower
+PLANT (2,2) tulip
+PLANT (5,5) iris
+PLANT (3,3) rose
+grow 2
+grow 3 (3,3)
+grow 1 tulip
+grow 1 tulip
+plant (3,0) yam
+plant (3,6) lettuce
+plant (0,3) tomato
+plant (6,3) zucchini
+grow 2 vegetable
+pick rose
+plant (3,3) oak
+plant (2,2) pine
+grow 5 (3,3)
+pick tulip
+pick (0,0)
+harvest (0,3)
+pick (0,6)
+cut (3,3)
+harvest
+pick
+cut
