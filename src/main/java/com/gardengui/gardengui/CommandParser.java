@@ -2,6 +2,7 @@ package com.gardengui.gardengui;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
 
 public class CommandParser {
 
@@ -16,8 +17,10 @@ public class CommandParser {
 
     private Garden activeGarden;
 
-    public CommandParser(int rows, int cols) {
-        activeGarden = new Garden(rows, cols);
+    private final Color bg;
+    public CommandParser(int rows, int cols, Color background) {
+        this.activeGarden = new Garden(rows, cols);
+        this.bg = background;
     }
 
     public int[] toCoordinates(String parenthesisString){
@@ -47,7 +50,7 @@ public class CommandParser {
             int[] coordinates = toCoordinates(currentCommand[1]);
             String plantType = currentCommand[2].trim();
             // pass the coordinates to plant into the array of the garden
-            activeGarden.plant(coordinates[0], coordinates[1], plantType); }
+            activeGarden.plant(coordinates[0], coordinates[1], plantType, textArea); }
         // PRINT COMMAND HAS BEEN SHAVED OFF AS THE GUI IS ACTIVE ALWAYS!!
         else if(currentCommand[0].equals("GROW")){
             if(currentCommand.length == 2) {
@@ -57,21 +60,21 @@ public class CommandParser {
             else if(currentCommand[1].contains("(")){
                 int[] coordinates  = toCoordinates(currentCommand[2]);
                 // grow on the specific coordinates for the garden class
-                activeGarden.grow(Integer.parseInt(currentCommand[1]), coordinates[0], coordinates[1]);
+                activeGarden.grow(Integer.parseInt(currentCommand[1]), coordinates[0], coordinates[1], textArea);
             }else activeGarden.grow(Integer.parseInt(currentCommand[1]), currentCommand[2]); // pass the name of the plant to grow
         }
         else if(currentCommand[0].equals("HARVEST")){
             if(currentCommand.length == 1) {activeGarden.harvest();}// take all the vegetables off
             else if(currentCommand[1].contains("(")){
                 int[] coordinates  = toCoordinates(currentCommand[1]);
-                activeGarden.harvest(coordinates[0], coordinates[1]);
+                activeGarden.harvest(coordinates[0], coordinates[1], textArea);
             }else activeGarden.harvest(currentCommand[1]); }
 
         else if(currentCommand[0].equals("PICK")){
             if(currentCommand.length == 1) activeGarden.pick(); // pick all flowers
             else if(currentCommand[1].contains("(")){
                 int[] coordinates = toCoordinates(currentCommand[1]);
-                activeGarden.pick(coordinates[0], coordinates[1]); // pick on coordinates
+                activeGarden.pick(coordinates[0], coordinates[1], textArea); // pick on coordinates
             }else activeGarden.pick(currentCommand[1]);
         }
 
@@ -79,7 +82,7 @@ public class CommandParser {
             if(currentCommand.length == 1) activeGarden.cut(); // cut for all trees
             else if(currentCommand[1].contains("(")){
                 int[] coordinates = toCoordinates(currentCommand[1]);
-                activeGarden.cut(coordinates[0], coordinates[1]);
+                activeGarden.cut(coordinates[0], coordinates[1],textArea);
             }else activeGarden.cut(currentCommand[1]);
         }
         // append the command text to the paragraph, this will be changed later but it will probably help me debug
@@ -88,6 +91,6 @@ public class CommandParser {
     }
 
     public void drawActiveGarden(GraphicsContext gc, TextArea textArea) {
-        activeGarden.draw(gc, textArea);
+        activeGarden.draw(gc, bg);
     }
 }

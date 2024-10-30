@@ -1,0 +1,8 @@
+rows: 7
+cols: 7
+delay: 1.0
+
+plant (0,0) sunflower
+pick (0,0)
+plant (0,0) sunflower
+pick (0,0)

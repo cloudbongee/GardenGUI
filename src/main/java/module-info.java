@@ -10,6 +10,7 @@ module com.gardengui.gardengui {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.desktop;
+    requires jdk.compiler;
 
     opens com.gardengui.gardengui to javafx.fxml;
     exports com.gardengui.gardengui;

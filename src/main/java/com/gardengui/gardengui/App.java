@@ -2,7 +2,7 @@ package com.gardengui.gardengui;
 
 /*
  * App.java introduces the importations and necessary configurations to run a user interface
- * for the complete Garden application.
+ * for the complete Garden.java application.
  * Part of the code here was given by Adriana Picoral, for the class CSC210, at the University of Arizona.
  */
 import javafx.animation.PauseTransition;
@@ -35,7 +35,7 @@ public class App extends Application {
     private final static int RECT_SIZE = 20;
 
     // temporary constants for starter code
-    private final static int SIZE_ACROSS = 700;
+    private final static int SIZE_ACROSS = 800;
     private final static int SIZE_DOWN = 400;
 
     public static void main(String[] args) {
@@ -114,8 +114,9 @@ public class App extends Application {
         delay = Double.parseDouble(scanFile.nextLine().split(" ")[1]);
 
         // The command parser will update the screen and the text based on the commands giving
-        // by initiating a Garden instance inside itself in which the commands are meant to run
-        CommandParser newGardenCommands = new CommandParser(rows, cols);
+        // by initiating a Garden.java instance inside itself in which the commands are meant to run
+        Color backgroundColor = Color.rgb(87,74,53,1);
+        CommandParser newGardenCommands = new CommandParser(rows, cols, backgroundColor);
 
         PauseTransition wait = new PauseTransition(Duration.seconds(delay));
         wait.setOnFinished((e) -> {
@@ -182,7 +183,7 @@ public class App extends Application {
         // title the stage and place the pane into the scene into the stage
         // change this to have your name on it (required for when recording
         // the demonstation video)
-        primaryStage.setTitle("Garden - Jaime Meyer Beilis Michel ");
+        primaryStage.setTitle("Garden.java - Jaime Meyer Beilis Michel ");
         primaryStage.setScene(new Scene(p));
 
         return canvas.getGraphicsContext2D();
