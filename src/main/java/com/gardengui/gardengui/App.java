@@ -51,7 +51,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
 
-        newFile = new File("/home/cloudbong/IdeaProjects/GardenGUI/src/main/java/com/gardengui/gardengui/test.in");
+        newFile = new File("/home/cloudbong/IdeaProjects/GardenGUI/src/main/java/com/gardengui/gardengui/growBonsai.in");
         scanFile = new Scanner(newFile);
 
         rows = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
@@ -88,18 +88,12 @@ public class App extends Application {
 
     private void simulateGarden(GraphicsContext gc, TextArea command) throws FileNotFoundException {
 
-        // Counter sequenceCommands = new Counter(0);
-        // Counter achievedCommands = new Counter(0); Necessary in the case of manual input
-        // StringBuilder currentCommands = new StringBuilder(); Necessary in the case of manual input
-        // Hardcode the testing for the file
-
-        // Scan the initial values
-
         // The command parser will update the screen and the text based on the commands giving
         // by initiating a Garden.java instance inside itself in which the commands are meant to run
         Color backgroundColor = Color.rgb(87,74,53,1);
         CommandParser newGardenCommands = new CommandParser(rows, cols, backgroundColor, gc, PLOT_SIZE, RECT_SIZE);
 
+        // Setup the loop for java fx to start running
         PauseTransition wait = new PauseTransition(Duration.seconds(delay));
         wait.setOnFinished((e) -> {
 

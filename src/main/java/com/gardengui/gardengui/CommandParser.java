@@ -89,6 +89,13 @@ public class CommandParser {
                 activeGarden.cut(coordinates[0], coordinates[1],textArea);
             }else activeGarden.cut(currentCommand[1]);
         }
+        else if(currentCommand[0].equalsIgnoreCase("TRIM")){
+            if(currentCommand.length == 1) activeGarden.trim(); // cut for all trees
+            else if(currentCommand[1].contains("(")){
+                int[] coordinates = toCoordinates(currentCommand[1]);
+                activeGarden.trim(coordinates[0], coordinates[1],textArea);
+            }else activeGarden.trim(currentCommand[1]);
+        }
         // append the command text to the paragraph, this will be changed later but it will probably help me debug
         textArea.appendText(command + "\n");
         this.drawActiveGarden(gc, textArea, rectSize, plotSize);

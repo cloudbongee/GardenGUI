@@ -143,6 +143,20 @@ public class Garden {
                 garden[i][j] = null;
             } }}
     }
+    public void trim(){
+        for (Plant[] plants : this.garden) { for (int i = 0; i < plants.length; i++) {
+            if(plants[i] != null && plants[i].getFamily().equalsIgnoreCase("BONSAI")) plants[i] = null; }}}
+
+    public void trim(int x, int y, TextArea textArea){
+        if(0 <= x && x < rows && 0 <= y && y < cols && garden[x][y] != null && garden[x][y].getFamily().equalsIgnoreCase("BONSAI")) garden[x][y] = null;
+        else { System.out.println("Can't cut there.\n"); textArea.appendText("Can't cut there.\n");}
+    }
+    public void trim(String plantName){
+        for (int i = 0; i < garden.length; i++) { for (int j = 0; j < garden[i].length; j++) {
+            if(garden[i][j] != null && garden[i][j].getSpecies().equalsIgnoreCase(plantName) && garden[i][j].getFamily().equalsIgnoreCase("BONSAI")) {
+                garden[i][j] = null;
+            } }}
+    }
     public void draw(GraphicsContext gc, int plotSize, int rectSize, Color bg) {
         for (int i =0; i < this.garden.length; i++) {
             for (int j = 0; j < this.garden[i].length; j++) {

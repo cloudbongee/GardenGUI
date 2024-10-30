@@ -24,7 +24,22 @@ public class Bonsai extends Plant {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(this.color);
-        gc.fillRect(this.getPixel_coord_x(), this.getPixel_coord_y(), 50, 50);
+        this.drawHelper(gc, 0, 0);
+    }
+    private void drawHelper(GraphicsContext gc, int heightCounter, int YOffset) {
+        if(heightCounter == this.height) gc.fillRect(this.getPixel_coord_x() + 2*getRectSize(), this.getPixel_coord_y()+2*getRectSize(),getRectSize(), getRectSize());
+        else{
+            for(int i = 0; i < heightCounter; i++){
+                if(i < 3){
+                    if(YOffset > 2) YOffset -= 2;
+                    gc.fillRect(this.getPixel_coord_x() + 2 * this.getRectSize() + i * getRectSize(), this.getPixel_coord_y() + (2 + YOffset) * getRectSize(),
+                            this.getRectSize(), this.getRectSize());
+                    gc.fillRect(this.getPixel_coord_x() + 2 * this.getRectSize() - i * getRectSize(), this.getPixel_coord_y() + (2 - YOffset) * getRectSize(),
+                            this.getRectSize(), this.getRectSize());
+                }
+            }
+            this.drawHelper(gc, heightCounter + 1, YOffset+1);
+        }
     }
 
 }

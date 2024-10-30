@@ -1,0 +1,12 @@
+rows: 3
+cols: 5
+delay: 1.0
+
+plant (1,1) cherry
+grow
+grow
+grow
+grow
+grow
+grow
+pick
