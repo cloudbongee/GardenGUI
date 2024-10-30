@@ -40,7 +40,7 @@ public class CommandParser {
     having an if statement also permits for direct control of what's occuring with the logic!
      */
 
-    public void parse(String command, GraphicsContext gc, TextArea textArea){
+    public void parse(String command, GraphicsContext gc, TextArea textArea, int plotSize){
         // parse the given string, trim the edges, convert to uppercase, split on space
         String[] currentCommand = command.trim().toUpperCase().split(" ");
 
@@ -87,10 +87,10 @@ public class CommandParser {
         }
         // append the command text to the paragraph, this will be changed later but it will probably help me debug
         textArea.appendText(command + "\n");
-        this.drawActiveGarden(gc, textArea);
+        this.drawActiveGarden(gc, textArea, plotSize);
     }
 
-    public void drawActiveGarden(GraphicsContext gc, TextArea textArea) {
-        activeGarden.draw(gc, bg);
+    public void drawActiveGarden(GraphicsContext gc, TextArea textArea, int plotSize) {
+        activeGarden.draw(gc, plotSize, bg);
     }
 }

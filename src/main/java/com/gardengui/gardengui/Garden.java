@@ -127,13 +127,13 @@ public class Garden {
         for (Plant[] plants : this.garden) { for (int i = 0; i < plants.length; i++) {
             if(plants[i] != null && plants[i].getSpecies().equalsIgnoreCase(plantName) && plants[i].getFamily().equalsIgnoreCase("TREE")) plants[i] = null; }}
     }
-    public void draw(GraphicsContext gc, Color bg) {
+    public void draw(GraphicsContext gc, int plotSize, Color bg) {
         for (int i =0; i < this.garden.length; i++) {
             for (int j = 0; j < this.garden[i].length; j++) {
                 if(this.garden[i][j] != null) this.garden[i][j].draw(gc);
                 else {
                     gc.setFill(bg);
-                    gc.clearRect(i * 50, j * 50, 50,50);
+                    gc.clearRect(i * plotSize, j * plotSize, plotSize,plotSize);
                 }
             }
         }

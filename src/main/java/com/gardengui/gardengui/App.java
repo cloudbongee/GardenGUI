@@ -30,13 +30,19 @@ public class App extends Application {
     private static int rows;
     private static int cols;
 
+
     // constants for the program
     private final static int TEXT_SIZE = 120;
     private final static int RECT_SIZE = 20;
+    private final static int PLOT_SIZE = RECT_SIZE * 5;
 
     // temporary constants for starter code
-    private final static int SIZE_ACROSS = 800;
-    private final static int SIZE_DOWN = 400;
+    private int SIZE_ACROSS;
+    private int SIZE_DOWN;
+
+    private static File newFile;
+    private static Scanner scanFile;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -45,9 +51,21 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
 
+        newFile = new File("/home/cloudbong/IdeaProjects/GardenGUI/src/main/java/com/gardengui/gardengui/test.in");
+        scanFile = new Scanner(newFile);
+
+        rows = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
+        cols = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
+        // added the delay as an initial command too
+        delay = Double.parseDouble(scanFile.nextLine().split(" ")[1]);
+
         // TODO: change SIZE_ACROSS to something like
         // num_cols * plot_size * CELLSIZE and SIZE_DOWN
         // to something like num_rows * plot_size * CELLSIZE
+
+        SIZE_ACROSS = cols * PLOT_SIZE;
+        SIZE_DOWN = rows * PLOT_SIZE;
+
         TextArea command = new TextArea();
         GraphicsContext gc = setupStage(primaryStage, SIZE_ACROSS, SIZE_DOWN,
                 command);
@@ -97,21 +115,12 @@ public class App extends Application {
 
     private void simulateGarden(GraphicsContext gc, TextArea command) throws FileNotFoundException {
 
-
-
         // Counter sequenceCommands = new Counter(0);
         // Counter achievedCommands = new Counter(0); Necessary in the case of manual input
         // StringBuilder currentCommands = new StringBuilder(); Necessary in the case of manual input
-
         // Hardcode the testing for the file
-        File newFile = new File("/home/cloudbong/IdeaProjects/GardenGUI/src/main/java/com/gardengui/gardengui/test.in");
-        Scanner scanFile = new Scanner(newFile);
 
         // Scan the initial values
-        rows = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
-        cols = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
-        // added the delay as an initial command too
-        delay = Double.parseDouble(scanFile.nextLine().split(" ")[1]);
 
         // The command parser will update the screen and the text based on the commands giving
         // by initiating a Garden.java instance inside itself in which the commands are meant to run
@@ -121,21 +130,11 @@ public class App extends Application {
         PauseTransition wait = new PauseTransition(Duration.seconds(delay));
         wait.setOnFinished((e) -> {
 
-            //==== Code that should be executed after each delay goes in here.
-            // read in the next command
-            // if there was a command left in the file:
-            // * apply that command to the garden
-            // * draw to the canvas by calling your gardenDraw(gc)
-            // * append the command to the text field, command.appendText(...);
-            // * call wait.playFromStart();
-            // else:
-            // * call wait.stop();
-
             if (scanFile.hasNextLine()) {
                 // let the command parser take care of the commands.
                 String currCommand = scanFile.nextLine();
                 if(!currCommand.equals("")) {
-                    newGardenCommands.parse(currCommand, gc, command);
+                    newGardenCommands.parse(currCommand, gc, command, PLOT_SIZE);
                 }
                 wait.playFromStart();
             }
