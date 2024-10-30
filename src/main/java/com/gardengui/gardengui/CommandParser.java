@@ -1,8 +1,21 @@
 package com.gardengui.gardengui;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.TextArea;
+
 public class CommandParser {
 
+    /*
+    IMPORTANT:
+    Passing a reference to an object in java fx to become a memory slot of the instance
+    will cause a copy to be passed down, and not the actual object, to change the object itself,
+    to edit the graphics context and the text area information of the GUI
+    it is necessary to pass it down as a parameter to the function , but not to instance it
+    with the object!!
+     */
+
     private Garden activeGarden;
+
     public CommandParser(int rows, int cols) {
         activeGarden = new Garden(rows, cols);
     }
@@ -16,19 +29,65 @@ public class CommandParser {
         return coords;
     }
 
-    public void parse(String command){
-        String[] currentCommand = command.split(",");
+
+    /*
+    Stylistical decision on the coding of this:
+    Java is very weird about switch cases, some versions of java prefer to support and perform with different timings over
+    different denominations of the same switch case. Technically, this could have been written in far less lines, however,
+    having an if statement also permits for direct control of what's occuring with the logic!
+     */
+
+    public void parse(String command, GraphicsContext gc, TextArea textArea){
+        // parse the given string, trim the edges, convert to uppercase, split on space
+        String[] currentCommand = command.trim().toUpperCase().split(" ");
 
         // return the plant command to the garden
-        if(currentCommand[0].toUpperCase().equals("PLANT")) ;
+        if(currentCommand[0].equals("PLANT")) {
             //TO DO: Pass the plant coordinates to the garden plant command
-
-        // return the grow command to the garden
-        else if(currentCommand[0].toUpperCase().equals("GROW")){
-            //TO DO: Parse the grow string and then add the
+            int[] coordinates = toCoordinates(currentCommand[1]);
+            String plantType = currentCommand[2].trim();
+            // pass the coordinates to plant into the array of the garden
+            activeGarden.plant(coordinates[0], coordinates[1], plantType); }
+        // PRINT COMMAND HAS BEEN SHAVED OFF AS THE GUI IS ACTIVE ALWAYS!!
+        else if(currentCommand[0].equals("GROW")){
+            if(currentCommand.length == 2) {
+                // Grow everything by the amount given
+                activeGarden.grow(Integer.parseInt(currentCommand[1]));
+            }
+            else if(currentCommand[1].contains("(")){
+                int[] coordinates  = toCoordinates(currentCommand[2]);
+                // grow on the specific coordinates for the garden class
+                activeGarden.grow(Integer.parseInt(currentCommand[1]), coordinates[0], coordinates[1]);
+            }else activeGarden.grow(Integer.parseInt(currentCommand[1]), currentCommand[2]); // pass the name of the plant to grow
         }
-        else if(currentCommand[0].toUpperCase().equals("HARVEST")){
+        else if(currentCommand[0].equals("HARVEST")){
+            if(currentCommand.length == 1) {activeGarden.harvest();}// take all the vegetables off
+            else if(currentCommand[1].contains("(")){
+                int[] coordinates  = toCoordinates(currentCommand[1]);
+                activeGarden.harvest(coordinates[0], coordinates[1]);
+            }else activeGarden.harvest(currentCommand[1]); }
 
+        else if(currentCommand[0].equals("PICK")){
+            if(currentCommand.length == 1) activeGarden.pick(); // pick all flowers
+            else if(currentCommand[1].contains("(")){
+                int[] coordinates = toCoordinates(currentCommand[1]);
+                activeGarden.pick(coordinates[0], coordinates[1]); // pick on coordinates
+            }else activeGarden.pick(currentCommand[1]);
         }
+
+        else if(currentCommand[0].equals("CUT")){
+            if(currentCommand.length == 1) activeGarden.cut(); // cut for all trees
+            else if(currentCommand[1].contains("(")){
+                int[] coordinates = toCoordinates(currentCommand[1]);
+                activeGarden.cut(coordinates[0], coordinates[1]);
+            }else activeGarden.cut(currentCommand[1]);
+        }
+        // append the command text to the paragraph, this will be changed later but it will probably help me debug
+        textArea.appendText(command + "\n");
+        this.drawActiveGarden(gc, textArea);
+    }
+
+    public void drawActiveGarden(GraphicsContext gc, TextArea textArea) {
+        activeGarden.draw(gc, textArea);
     }
 }
