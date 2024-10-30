@@ -3,10 +3,6 @@ cols: 5
 delay: 1.0
 
 plant (1,1) oak
-grow
-grow
-grow
-grow
-grow
+grow 5 (1,1)
 grow
 cut

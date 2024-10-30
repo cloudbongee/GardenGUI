@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 public abstract class Plant {
     public abstract void draw(GraphicsContext gc);
 
-    private int abs(int i){
+    private int abs(Integer i){
         if(i < 0) return -1 * i;
         else return i;
     }
@@ -47,7 +47,7 @@ public abstract class Plant {
     protected abstract String getSpecies();
     protected abstract Color getColor();
     protected void grow(){this.height++;}
-    protected void grow(Integer height){this.height+= this.abs(height);}
+    protected void grow(Integer height){this.height+= abs(height);}
     public int getLocationRow(){return this.pixel_coord_x; }
     public int getLocationCol(){return this.pixel_coord_y; }
     public int getRectSize(){return this.rectSize;}

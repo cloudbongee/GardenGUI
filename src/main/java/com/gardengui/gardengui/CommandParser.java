@@ -61,20 +61,20 @@ public class CommandParser {
                 // Grow everything by the amount given
                 activeGarden.grow(Integer.parseInt(currentCommand[1]));
             }
-            else if(currentCommand[1].contains("(")){
+            else if(currentCommand[2].contains("(")){
                 int[] coordinates  = toCoordinates(currentCommand[2]);
                 // grow on the specific coordinates for the garden class
                 activeGarden.grow(Integer.parseInt(currentCommand[1]), coordinates[0], coordinates[1], textArea);
             }else activeGarden.grow(Integer.parseInt(currentCommand[1]), currentCommand[2]); // pass the name of the plant to grow
         }
-        else if(currentCommand[0].equals("HARVEST")){
+        else if(currentCommand[0].equalsIgnoreCase("HARVEST")){
             if(currentCommand.length == 1) {activeGarden.harvest();}// take all the vegetables off
             else if(currentCommand[1].contains("(")){
                 int[] coordinates  = toCoordinates(currentCommand[1]);
                 activeGarden.harvest(coordinates[0], coordinates[1], textArea);
             }else activeGarden.harvest(currentCommand[1]); }
 
-        else if(currentCommand[0].equals("PICK")){
+        else if(currentCommand[0].equalsIgnoreCase("PICK")){
             if(currentCommand.length == 1) activeGarden.pick(); // pick all flowers
             else if(currentCommand[1].contains("(")){
                 int[] coordinates = toCoordinates(currentCommand[1]);
@@ -82,7 +82,7 @@ public class CommandParser {
             }else activeGarden.pick(currentCommand[1]);
         }
 
-        else if(currentCommand[0].equals("CUT")){
+        else if(currentCommand[0].equalsIgnoreCase("CUT")){
             if(currentCommand.length == 1) activeGarden.cut(); // cut for all trees
             else if(currentCommand[1].contains("(")){
                 int[] coordinates = toCoordinates(currentCommand[1]);

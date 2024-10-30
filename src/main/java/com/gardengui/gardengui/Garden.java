@@ -85,6 +85,7 @@ public class Garden {
             }
         }
     }
+
     public void grow(int amount, int x, int y, TextArea textArea){
         if(0 <= x && x < rows && 0 <= cols && y < cols && garden[x][y] != null) garden[x][y].grow(amount);
         else { System.out.println("Can't grow there.\n"); textArea.appendText("Can't grow there.\n");}
@@ -108,8 +109,10 @@ public class Garden {
     }
 
     public void harvest(String plantName){
-        for (Plant[] plants : this.garden) { for (int i = 0; i < plants.length; i++) {
-            if(plants[i] != null && plants[i].getSpecies().equalsIgnoreCase(plantName) && plants[i].getFamily().equalsIgnoreCase("VEGETABLE")) plants[i] = null; }}
+        for (int i = 0; i < garden.length; i++) { for (int j = 0; j < garden[i].length; j++) {
+            if(garden[i][j] != null && garden[i][j].getSpecies().equalsIgnoreCase(plantName) && garden[i][j].getFamily().equalsIgnoreCase("VEGETABLE")) {
+                garden[i][j] = null;
+            } }}
     }
 
     public void pick(){
@@ -121,27 +124,34 @@ public class Garden {
         else { System.out.println("Can't pick there.\n"); textArea.appendText("Can't pick there.\n");}
     }
     public void pick(String plantName){
-        for (Plant[] plants : this.garden) { for (int i = 0; i < plants.length; i++) {
-            if(plants[i] != null && plants[i].getSpecies().equalsIgnoreCase(plantName) && plants[i].getFamily().equalsIgnoreCase("FLOWER")) plants[i] = null; }}
+        for (int i = 0; i < garden.length; i++) { for (int j = 0; j < garden[i].length; j++) {
+            if(garden[i][j] != null && garden[i][j].getSpecies().equalsIgnoreCase(plantName) && garden[i][j].getFamily().equalsIgnoreCase("FLOWER")) {
+                garden[i][j] = null;
+            } }}
     }
     public void cut(){
         for (Plant[] plants : this.garden) { for (int i = 0; i < plants.length; i++) {
             if(plants[i] != null && plants[i].getFamily().equalsIgnoreCase("TREE")) plants[i] = null; }}}
 
     public void cut(int x, int y, TextArea textArea){
-        if(0 <= x && x < rows && 0 <= y && y < cols && garden[x][y].getSpecies().equalsIgnoreCase("TREE")) garden[x][y] = null;
+        if(0 <= x && x < rows && 0 <= y && y < cols && garden[x][y] != null && garden[x][y].getFamily().equalsIgnoreCase("TREE")) garden[x][y] = null;
         else { System.out.println("Can't cut there.\n"); textArea.appendText("Can't cut there.\n");}
     }
     public void cut(String plantName){
-        for (Plant[] plants : this.garden) { for (int i = 0; i < plants.length; i++) {
-            if(plants[i] != null && plants[i].getSpecies().equalsIgnoreCase(plantName) && plants[i].getFamily().equalsIgnoreCase("TREE")) plants[i] = null; }}
+        for (int i = 0; i < garden.length; i++) { for (int j = 0; j < garden[i].length; j++) {
+            if(garden[i][j] != null && garden[i][j].getSpecies().equalsIgnoreCase(plantName) && garden[i][j].getFamily().equalsIgnoreCase("TREE")) {
+                garden[i][j] = null;
+            } }}
     }
     public void draw(GraphicsContext gc, int plotSize, int rectSize, Color bg) {
         for (int i =0; i < this.garden.length; i++) {
             for (int j = 0; j < this.garden[i].length; j++) {
-                if(this.garden[i][j] != null) this.garden[i][j].draw(gc);
+                if(this.garden[i][j] != null) {
+                    this.drawEmptyPlot(i,j,gc,plotSize,rectSize,bg);
+                    this.garden[i][j].draw(gc);
+                }
                 else {
-                    drawEmptyPlot(i,j,gc,plotSize,rectSize,bg);
+                    this.drawEmptyPlot(i,j,gc,plotSize,rectSize,bg);
                 }}}}
     private void drawEmptyPlot(int x, int y, GraphicsContext gc, int plotSize, int rectSize, Color bg) {
         gc.clearRect(x * plotSize, y * plotSize, plotSize,plotSize);

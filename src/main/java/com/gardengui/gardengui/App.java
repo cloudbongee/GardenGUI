@@ -59,10 +59,6 @@ public class App extends Application {
         // added the delay as an initial command too
         delay = Double.parseDouble(scanFile.nextLine().split(" ")[1]);
 
-        // TODO: change SIZE_ACROSS to something like
-        // num_cols * plot_size * CELLSIZE and SIZE_DOWN
-        // to something like num_rows * plot_size * CELLSIZE
-
         SIZE_ACROSS = cols * PLOT_SIZE;
         SIZE_DOWN = rows * PLOT_SIZE;
 
@@ -164,16 +160,6 @@ public class App extends Application {
         primaryStage.setScene(new Scene(p));
 
         return canvas.getGraphicsContext2D();
-    }
-
-    // Helper method to draw a rectangular tile and output info in given
-    // text area.
-    private void drawTileDebug(TextArea command, GraphicsContext gc,
-                               String colorname, int x, int y, int size) {
-        command.appendText("drawTileDebug: x=" + x + ", y = " + y + "\n");
-        Color c = Color.valueOf(colorname); // sets the value of the color as an object
-        gc.setFill(c); // sets the color for what is to be drawn
-        gc.fillRect(x, y, size, size); // creates a filled rectangle by providing a specific coordinate, size
     }
 
 }
