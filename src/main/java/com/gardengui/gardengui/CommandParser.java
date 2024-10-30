@@ -54,7 +54,10 @@ public class CommandParser {
             activeGarden.plant(coordinates[0], coordinates[1], plantType, textArea, rectSize, plotSize); }
         // PRINT COMMAND HAS BEEN SHAVED OFF AS THE GUI IS ACTIVE ALWAYS!!
         else if(currentCommand[0].equals("GROW")){
-            if(currentCommand.length == 2) {
+            if(currentCommand.length == 1){
+                activeGarden.grow();
+            }
+            else if(currentCommand.length == 2) {
                 // Grow everything by the amount given
                 activeGarden.grow(Integer.parseInt(currentCommand[1]));
             }

@@ -74,29 +74,6 @@ public class App extends Application {
         simulateGarden(gc, command);
     }
 
-    /*
-    private void runManualCommands(Counter achievedCount, TextArea command) {
-
-        StringBuilder current = new StringBuilder();
-
-        for (CharSequence paragraph : command.getParagraphs()) {
-            String stringedParagraph = paragraph.toString();
-            current.append(stringedParagraph);
-        }
-
-        // compare both strings aren't equal after iteration
-        if(!(current.compareTo(achieved) == 0) ){
-            // split string based on linebreak
-            String[] commands = current.toString().split("\n");
-
-            for(int i = achievedCount.count; i < commands.length; i++) {
-                // pass the command to update
-                achievedCount.count++;
-            }
-        }
-    }
-    */
-
     private ArrayList<String> readFile(String fileName, int rows, int cols, double delay) throws FileNotFoundException {
         File openFile = new File(fileName);
         Scanner scanFile = new Scanner(openFile);

@@ -25,6 +25,13 @@ public class Tree extends Plant {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(this.color);
-        gc.fillRect(this.getPixel_coord_x(), this.getPixel_coord_y(), getRectSize(), getRectSize());
+        this.drawHelper(gc, 1);
+    }
+    private void drawHelper(GraphicsContext gc, int heightCount) {
+        if(heightCount > 5 || heightCount == this.height + 1) return;
+        else{
+            gc.fillRect(this.getPixel_coord_x() + 3 * this.getRectSize(), this.getPixel_coord_y() + (5 - heightCount) * this.getRectSize(), this.getRectSize(), this.getRectSize());
+            this.drawHelper(gc, heightCount + 1);
+        }
     }
 }

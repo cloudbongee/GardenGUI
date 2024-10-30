@@ -78,6 +78,13 @@ public class Garden {
         }
     }
 
+    public void grow(){
+        for(Plant[] plants: this.garden){
+            for(Plant plant : plants){
+                if(plant != null) plant.grow();
+            }
+        }
+    }
     public void grow(int amount, int x, int y, TextArea textArea){
         if(0 <= x && x < rows && 0 <= cols && y < cols && garden[x][y] != null) garden[x][y].grow(amount);
         else { System.out.println("Can't grow there.\n"); textArea.appendText("Can't grow there.\n");}
@@ -141,7 +148,7 @@ public class Garden {
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 6; j++){
                 gc.setFill(bg);
-                gc.fillRect(x * plotSize + i * Math.floorDiv(plotSize,5), y * plotSize + j * Math.floorDiv(plotSize,5), 2,2);
+                gc.fillRect(x * plotSize + i * Math.floorDiv(plotSize,5) + Math.floorDiv(rectSize,2), y * plotSize + j * Math.floorDiv(plotSize,5) + Math.floorDiv(rectSize,2), 2,2);
             }
         }
     }

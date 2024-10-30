@@ -16,7 +16,7 @@ public abstract class Plant {
     private int pixel_coord_x;
     private int pixel_coord_y;
     private int rectSize;
-    private int height;
+    protected int height;
     protected String species;
     protected String family;
     protected Color plantColor;

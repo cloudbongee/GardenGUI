@@ -26,4 +26,5 @@ public class Bonsai extends Plant {
         gc.setFill(this.color);
         gc.fillRect(this.getPixel_coord_x(), this.getPixel_coord_y(), 50, 50);
     }
+
 }

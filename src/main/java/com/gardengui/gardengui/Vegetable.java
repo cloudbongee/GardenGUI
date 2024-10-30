@@ -24,6 +24,13 @@ public class Vegetable extends Plant {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(this.color);
-        gc.fillRect(this.getPixel_coord_x(), this.getPixel_coord_y(), getRectSize(), getRectSize());
+        this.drawHelper(gc, 0);
+    }
+    private void drawHelper(GraphicsContext gc, int heightCount) {
+        if(heightCount > 4 || heightCount == this.height) return;
+        else{
+            gc.fillRect(this.getPixel_coord_x() + 3 * this.getRectSize(), this.getPixel_coord_y() + (heightCount) * this.getRectSize(), this.getRectSize(), this.getRectSize());
+            this.drawHelper(gc, heightCount + 1);
+        }
     }
 }
