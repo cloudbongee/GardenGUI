@@ -125,7 +125,7 @@ public class App extends Application {
         // The command parser will update the screen and the text based on the commands giving
         // by initiating a Garden.java instance inside itself in which the commands are meant to run
         Color backgroundColor = Color.rgb(87,74,53,1);
-        CommandParser newGardenCommands = new CommandParser(rows, cols, backgroundColor);
+        CommandParser newGardenCommands = new CommandParser(rows, cols, backgroundColor, gc, PLOT_SIZE, RECT_SIZE);
 
         PauseTransition wait = new PauseTransition(Duration.seconds(delay));
         wait.setOnFinished((e) -> {
@@ -134,7 +134,8 @@ public class App extends Application {
                 // let the command parser take care of the commands.
                 String currCommand = scanFile.nextLine();
                 if(!currCommand.equals("")) {
-                    newGardenCommands.parse(currCommand, gc, command, PLOT_SIZE);
+
+                    newGardenCommands.parse(currCommand, gc, command, PLOT_SIZE, RECT_SIZE);
                 }
                 wait.playFromStart();
             }

@@ -18,9 +18,10 @@ public class CommandParser {
     private Garden activeGarden;
 
     private final Color bg;
-    public CommandParser(int rows, int cols, Color background) {
+    public CommandParser(int rows, int cols, Color background, GraphicsContext gc, int plotSize, int rectSize) {
         this.activeGarden = new Garden(rows, cols);
         this.bg = background;
+        activeGarden.draw(gc, plotSize, rectSize, background);
     }
 
     public int[] toCoordinates(String parenthesisString){
@@ -40,7 +41,7 @@ public class CommandParser {
     having an if statement also permits for direct control of what's occuring with the logic!
      */
 
-    public void parse(String command, GraphicsContext gc, TextArea textArea, int plotSize){
+    public void parse(String command, GraphicsContext gc, TextArea textArea, int plotSize, int rectSize){
         // parse the given string, trim the edges, convert to uppercase, split on space
         String[] currentCommand = command.trim().toUpperCase().split(" ");
 
@@ -50,7 +51,7 @@ public class CommandParser {
             int[] coordinates = toCoordinates(currentCommand[1]);
             String plantType = currentCommand[2].trim();
             // pass the coordinates to plant into the array of the garden
-            activeGarden.plant(coordinates[0], coordinates[1], plantType, textArea); }
+            activeGarden.plant(coordinates[0], coordinates[1], plantType, textArea, rectSize, plotSize); }
         // PRINT COMMAND HAS BEEN SHAVED OFF AS THE GUI IS ACTIVE ALWAYS!!
         else if(currentCommand[0].equals("GROW")){
             if(currentCommand.length == 2) {
@@ -87,10 +88,10 @@ public class CommandParser {
         }
         // append the command text to the paragraph, this will be changed later but it will probably help me debug
         textArea.appendText(command + "\n");
-        this.drawActiveGarden(gc, textArea, plotSize);
+        this.drawActiveGarden(gc, textArea, rectSize, plotSize);
     }
 
-    public void drawActiveGarden(GraphicsContext gc, TextArea textArea, int plotSize) {
-        activeGarden.draw(gc, plotSize, bg);
+    public void drawActiveGarden(GraphicsContext gc, TextArea textArea, int rectSize, int plotSize) {
+        activeGarden.draw(gc, plotSize, rectSize, bg);
     }
 }

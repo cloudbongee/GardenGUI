@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Flower extends Plant {
     private Color color;
-    public Flower(int x, int y, String species, String family){
-        super(x,y,species,family);
+    public Flower(int x, int y, String species, String family, int rectSize, int plotSize){
+        super(x,y,species,family, rectSize, plotSize);
         this.color = this.getColor();
     }
 
@@ -24,6 +24,6 @@ public class Flower extends Plant {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(this.color);
-        gc.fillRect(this.getPixel_coord_x(), this.getPixel_coord_y(), 50, 50);
+        gc.fillRect(this.getPixel_coord_x(), this.getPixel_coord_y(), getRectSize() * 5, getRectSize() * 5);
     }
 }

@@ -4,6 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import org.w3c.dom.Text;
+
+import java.util.GregorianCalendar;
 import java.util.Map;
 
 import static java.util.Map.entry;
@@ -54,17 +56,17 @@ public class Garden {
         this.garden = new Plant[rows][cols];
     }
 
-    public void plant(int x, int y, String plantType, TextArea textArea) {
+    public void plant(int x, int y, String plantType, TextArea textArea, int rectSize, int plotSize) {
         if(typeRelationship.containsKey(plantType.toUpperCase()) && 0 <= x && 0 <= y && x < rows && y < cols) {
             // planting logic implementation, ensure existance through the mappings given
             if(typeRelationship.get(plantType.toUpperCase()).equals("Flower")){
-                garden[x][y] = new Flower(x, y, plantType.toUpperCase(), typeRelationship.get(plantType.toUpperCase()));
+                garden[x][y] = new Flower(x, y, plantType.toUpperCase(), typeRelationship.get(plantType.toUpperCase()), rectSize, plotSize);
             }else if(typeRelationship.get(plantType.toUpperCase()).equals("Vegetable")){
-                garden[x][y] = new Vegetable(x, y, plantType.toUpperCase(), typeRelationship.get(plantType.toUpperCase()));
+                garden[x][y] = new Vegetable(x, y, plantType.toUpperCase(), typeRelationship.get(plantType.toUpperCase()), rectSize, plotSize);
             }else if(typeRelationship.get(plantType.toUpperCase()).equals("Bonsai")){
-                garden[x][y] = new Bonsai(x, y, plantType.toUpperCase(), typeRelationship.get(plantType.toUpperCase()));
+                garden[x][y] = new Bonsai(x, y, plantType.toUpperCase(), typeRelationship.get(plantType.toUpperCase()), rectSize, plotSize);
             }else if(typeRelationship.get(plantType.toUpperCase()).equals("Tree")){
-                garden[x][y] = new Tree(x, y, plantType.toUpperCase(), typeRelationship.get(plantType.toUpperCase()));
+                garden[x][y] = new Tree(x, y, plantType.toUpperCase(), typeRelationship.get(plantType.toUpperCase()), rectSize, plotSize);
             }else{ System.out.println("Can't plant there.\n"); textArea.appendText("Can't plant there\n");}
         }else{ System.out.println("Can't plant there.\n"); textArea.appendText("Can't plant there.\n");}}
 
@@ -127,15 +129,21 @@ public class Garden {
         for (Plant[] plants : this.garden) { for (int i = 0; i < plants.length; i++) {
             if(plants[i] != null && plants[i].getSpecies().equalsIgnoreCase(plantName) && plants[i].getFamily().equalsIgnoreCase("TREE")) plants[i] = null; }}
     }
-    public void draw(GraphicsContext gc, int plotSize, Color bg) {
+    public void draw(GraphicsContext gc, int plotSize, int rectSize, Color bg) {
         for (int i =0; i < this.garden.length; i++) {
             for (int j = 0; j < this.garden[i].length; j++) {
                 if(this.garden[i][j] != null) this.garden[i][j].draw(gc);
                 else {
-                    gc.setFill(bg);
-                    gc.clearRect(i * plotSize, j * plotSize, plotSize,plotSize);
-                }
+                    drawEmptyPlot(i,j,gc,plotSize,rectSize,bg);
+                }}}}
+    private void drawEmptyPlot(int x, int y, GraphicsContext gc, int plotSize, int rectSize, Color bg) {
+        gc.clearRect(x * plotSize, y * plotSize, plotSize,plotSize);
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 6; j++){
+                gc.setFill(bg);
+                gc.fillRect(x * plotSize + i * Math.floorDiv(plotSize,5), y * plotSize + j * Math.floorDiv(plotSize,5), 2,2);
             }
         }
-}}
+    }
+}
 

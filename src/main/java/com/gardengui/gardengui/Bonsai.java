@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Bonsai extends Plant {
     private Color color;
-    public Bonsai(int x, int y, String species, String family){
-        super(x,y,species,family);
+    public Bonsai(int x, int y, String species, String family, int rectSize, int plotSize){
+        super(x,y,species,family, rectSize, plotSize);
         this.color = this.getColor();
     }
 
