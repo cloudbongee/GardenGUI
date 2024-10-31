@@ -3,18 +3,43 @@ package com.gardengui.gardengui;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * The flower class is a subclass of the plant class, containing the information for one of the types of plant available
+ * in the garden application. As characteristic trait, the printing of the flower is done spanning in all directions from
+ * the center of the plot
+ */
 public class Flower extends Plant {
+    // the color is set by rounding the integer created from the characters of the plant type
     private Color color;
+
+    /**
+     * Flower constructor
+     * @param x
+     *  x position in the grid
+     * @param y
+     *  y position in the grid
+     * @param species
+     *      the species is the super-type of flower
+     * @param family
+     *      family is the subtype as inputted when planted
+     * @param rectSize
+     *      rectSize is just a storage of the rectangle size passed which the flower should represent
+     * @param plotSize
+     *      plotSize is just a storage of the rectangular plot passed which the flower should represent
+     */
     public Flower(int x, int y, String species, String family, int rectSize, int plotSize){
         super(x,y,species,family, rectSize, plotSize);
         this.color = this.getColor();
     }
 
+
+    // override functions are described in the superclass
+    // return the species of the flower
     @Override
     protected String getSpecies() {
         return this.species;
     }
-
+    // return the color of the flower
     @Override
     protected Color getColor() {
         // just a function to vary the color based on the ord value of the first few letters.
@@ -26,6 +51,7 @@ public class Flower extends Plant {
         gc.setFill(this.color);
         this.drawHelper(gc);
     }
+    // contains the information of the cases with which the flower should be drawn
     private void drawHelper(GraphicsContext gc) {
 
             if(this.height == 1) {

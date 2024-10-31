@@ -3,6 +3,8 @@ package com.gardengui.gardengui;
 /*
  * App.java introduces the importations and necessary configurations to run a user interface
  * for the complete Garden.java application.
+ * @Author: Jaime Meyer Beilis Michel
+ * @Since: October 30 2024
  * Part of the code here was given by Adriana Picoral, for the class CSC210, at the University of Arizona.
  */
 import javafx.animation.PauseTransition;
@@ -18,11 +20,14 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.channels.ConnectionPendingException;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
+/*
+The public class App, inheriting from JavaFX application class, is the main engine for the
+Garden application, this code was provided by Adriana Picoral, for the class CSC210 at the university of Arizona,
+and was modified by Jaime Meyer Beilis Michel based on the instructions given
+ */
 public class App extends Application {
 
     // variables that will be read in from file
@@ -30,35 +35,41 @@ public class App extends Application {
     private static int rows;
     private static int cols;
 
-
     // constants for the program
     private final static int TEXT_SIZE = 120;
     private final static int RECT_SIZE = 20;
     private final static int PLOT_SIZE = RECT_SIZE * 5;
-
-    // temporary constants for starter code
     private int SIZE_ACROSS;
     private int SIZE_DOWN;
 
+    // globalize the file reader and the file scanner for it to be accessed class wide
     private static File newFile;
     private static Scanner scanFile;
 
-
+    // starts the application
     public static void main(String[] args) {
         launch(args);
     }
 
+
+    /**
+     * The start void is part of the main functionality of the application, it initiates the values
+     * and gathers the setup functions described to run the simulation
+     * @param primaryStage
+     *      A JavaFX object that contains the top level of the classes referent to graphics
+     * @throws FileNotFoundException
+     *      Error for the inexistence of the given file path
+     */
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-
-        newFile = new File("/home/cloudbong/IdeaProjects/GardenGUI/src/main/java/com/gardengui/gardengui/growBonsai.in");
+        newFile = new File("/home/cloudbong/IdeaProjects/GardenGUI/src/main/java/com/gardengui/gardengui/test.in");
         scanFile = new Scanner(newFile);
-
+        // the first three lines of the file are meant to represent the information necessary
         rows = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
         cols = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
         // added the delay as an initial command too
         delay = Double.parseDouble(scanFile.nextLine().split(" ")[1]);
-
+        // setup based on the size of the plot, and the size of a rectangle
         SIZE_ACROSS = cols * PLOT_SIZE;
         SIZE_DOWN = rows * PLOT_SIZE;
 
@@ -70,23 +81,17 @@ public class App extends Application {
         simulateGarden(gc, command);
     }
 
-    private ArrayList<String> readFile(String fileName, int rows, int cols, double delay) throws FileNotFoundException {
-        File openFile = new File(fileName);
-        Scanner scanFile = new Scanner(openFile);
-        // initialize garden and columns by iterating first two lines
-        rows = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
-        cols = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
-        // added the delay as an initial command too
-        delay = Double.parseDouble(scanFile.nextLine().split(" ")[1]);
-
-        ArrayList<String > result = new ArrayList<>();
-        while(scanFile.hasNextLine()){
-            result.add(scanFile.nextLine());
-        }
-        return result;
-    }
-
-    private void simulateGarden(GraphicsContext gc, TextArea command) throws FileNotFoundException {
+    /**
+     *
+     * SimulateGarden function contains a lambda function loop created from the wait Pause Transition.
+     * This permits running the main functionality of the application, passing the commands read and update based
+     * on them
+     * @param gc
+     *      The window editor information for the javaFX library
+     * @param command
+     *      Contains the text widget information and tools as provided by the javaFX library
+     */
+    private void simulateGarden(GraphicsContext gc, TextArea command) {
 
         // The command parser will update the screen and the text based on the commands giving
         // by initiating a Garden.java instance inside itself in which the commands are meant to run
@@ -97,11 +102,11 @@ public class App extends Application {
         PauseTransition wait = new PauseTransition(Duration.seconds(delay));
         wait.setOnFinished((e) -> {
 
+            // only scan if there is another line to be Scanned, otherwise stop
             if (scanFile.hasNextLine()) {
-                // let the command parser take care of the commands.
                 String currCommand = scanFile.nextLine();
-                if(!currCommand.equals("")) {
-
+                if(!currCommand.isEmpty()) {
+                    // let the command parser take care of the commands
                     newGardenCommands.parse(currCommand, gc, command, PLOT_SIZE, RECT_SIZE);
                 }
                 wait.playFromStart();
@@ -130,7 +135,6 @@ public class App extends Application {
      *            Reference to a TextArea that will be setup.
      * @return Reference to a GraphicsContext for drawing on.
      */
-
     public GraphicsContext setupStage(Stage primaryStage, int canvas_width,
                                       int canvas_height, TextArea command) {
         // Border pane will contain canvas for drawing and text area underneath

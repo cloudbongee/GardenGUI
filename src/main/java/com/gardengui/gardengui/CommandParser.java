@@ -4,6 +4,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 
+/**
+ * The CommandParser function is the spiritual successor of garden run, it takes the commands read in the main
+ *  loop of the application, and ensures that these are filtered correctly
+ */
 public class CommandParser {
 
     /*
@@ -14,16 +18,43 @@ public class CommandParser {
     it is necessary to pass it down as a parameter to the function , but not to instance it
     with the object!!
      */
-
+    // contains the garden that will be affected by the commands
     private Garden activeGarden;
 
+    // Some optional information I didn't really use much, but still is nice to have - permits editing the background
     private final Color bg;
+
+    /**
+     * Constructor call for the commandParser call, it is meant to be passed down the JavaFX objects to be able to modify them
+     * through the objects in the garden,
+     * @param rows
+     *      amount of rows the garden will have
+     * @param cols
+     *      amount of columns the garden will have
+     * @param background
+     *      the background Color, from the JavaFX color library (It was annoying to see the automatic import was not javafx)
+     * @param gc
+     *      contains the information of the scene shown in the window
+     * @param plotSize
+     *      pixel size of a plot that will contain 5x5 squares
+     * @param rectSize
+     *      pixel size of the squares contained in the plot
+     */
     public CommandParser(int rows, int cols, Color background, GraphicsContext gc, int plotSize, int rectSize) {
+        // initiate variables
         this.activeGarden = new Garden(rows, cols);
         this.bg = background;
+        // draw the empty garden, passing the nulls will make a collection of dots to represent the plotting space
         activeGarden.draw(gc, plotSize, rectSize, background);
     }
 
+    /**
+     * the toCoordinates method parses a string in the form '(n,n)' where n is an integer (written as a string)
+     * @param parenthesisString
+     *      String in the previously mentioned form
+     * @return coords
+     *      the coordinates as a pair of integers in a list
+     */
     public int[] toCoordinates(String parenthesisString){
         int[] coords = new int[2];
         // Removing parentheses and splitting by comma
@@ -38,9 +69,22 @@ public class CommandParser {
     Stylistical decision on the coding of this:
     Java is very weird about switch cases, some versions of java prefer to support and perform with different timings over
     different denominations of the same switch case. Technically, this could have been written in far less lines, however,
-    having an if statement also permits for direct control of what's occuring with the logic!
+    having an if statement also permits for direct control of what's  with the logic!
      */
 
+    /**
+     *
+     * @param command
+     *      String that contains the line read from the GUI
+     * @param gc
+     *      Object from javafx that contains the information of the scene shown in the window
+     * @param textArea
+     *      Object from javafx that permits showing strings and text in a text field
+     * @param plotSize
+     *      int that retains the pixel size of a plot space in the window
+     * @param rectSize
+     *      int that retains the pixel size of a rectangle for a plant in the window
+     */
     public void parse(String command, GraphicsContext gc, TextArea textArea, int plotSize, int rectSize){
         // parse the given string, trim the edges, convert to uppercase, split on space
         String[] currentCommand = command.trim().toUpperCase().split(" ");
@@ -101,6 +145,17 @@ public class CommandParser {
         this.drawActiveGarden(gc, textArea, rectSize, plotSize);
     }
 
+    /**
+     * The draw active garden method triggers the scan of the active garden to represent the updated garden in the GUI
+     * @param gc
+     *      JavaFX object, contains window graphical information
+     * @param textArea
+     *      Javafx object, contains text field information
+     * @param rectSize
+     *      Size in pixels of the rectangles contained
+     * @param plotSize
+     *      Size in pixels of the plot
+     */
     public void drawActiveGarden(GraphicsContext gc, TextArea textArea, int rectSize, int plotSize) {
         activeGarden.draw(gc, plotSize, rectSize, bg);
     }
