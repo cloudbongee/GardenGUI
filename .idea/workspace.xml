@@ -4,20 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b538dca-9e4b-4aee-83cf-0178d771773e" name="Changes" comment="Finished. Just record a video, maybe change the ord colors to cooler things (&quot;You never know, these greens are too hard to even differentiate from one another&quot;)">
+    <list default="true" id="4b538dca-9e4b-4aee-83cf-0178d771773e" name="Changes" comment="Done. My back hurts somewhat too much for my taste">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Bonsai.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Bonsai.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/CommandParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Counter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Flower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Flower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Garden.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Garden.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Plant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Tree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Vegetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/Vegetable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/test.in" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/test.in" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +102,7 @@
       <workItem from="1730264006864" duration="11435000" />
       <workItem from="1730282427075" duration="3743000" />
       <workItem from="1730311485636" duration="2841000" />
-      <workItem from="1730314397095" duration="14174000" />
+      <workItem from="1730314397095" duration="14405000" />
     </task>
     <task id="LOCAL-00001" summary="yeah">
       <option name="closed" value="true" />
@@ -186,7 +176,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730330150656</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Done. My back hurts somewhat too much for my taste">
+      <option name="closed" value="true" />
+      <created>1730335307813</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1730335307813</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,6 +210,7 @@
     <MESSAGE value="Added some rectangle drawings through recursive functions&#10;&#10;currently there is a logic issue on pick tulip in test.in&#10;it probably is that it is not checking if the space is null, and the space is not going null somehow ( could be worth checking ? )" />
     <MESSAGE value="Solved, just being a llittle too pretentious with this whole drawing thng as of now!!&#10;I still don't difure out if pick should or should not work" />
     <MESSAGE value="Finished. Just record a video, maybe change the ord colors to cooler things (&quot;You never know, these greens are too hard to even differentiate from one another&quot;)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished. Just record a video, maybe change the ord colors to cooler things (&quot;You never know, these greens are too hard to even differentiate from one another&quot;)" />
+    <MESSAGE value="Done. My back hurts somewhat too much for my taste" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done. My back hurts somewhat too much for my taste" />
   </component>
 </project>

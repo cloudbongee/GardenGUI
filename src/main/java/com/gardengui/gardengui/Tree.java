@@ -56,7 +56,6 @@ public class Tree extends Plant {
     public void draw(GraphicsContext gc) {
         gc.setFill(this.color);
         this.drawHelper(gc, 1);
-        System.out.println(this.height);
     }
 
     /**

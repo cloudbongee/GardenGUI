@@ -86,6 +86,8 @@ public class CommandParser {
      *      int that retains the pixel size of a rectangle for a plant in the window
      */
     public void parse(String command, GraphicsContext gc, TextArea textArea, int plotSize, int rectSize){
+        // append the command to the textField
+        textArea.appendText(command.toLowerCase() + "\n");
         // parse the given string, trim the edges, convert to uppercase, split on space
         String[] currentCommand = command.trim().toUpperCase().split(" ");
 
@@ -140,8 +142,6 @@ public class CommandParser {
                 activeGarden.trim(coordinates[0], coordinates[1],textArea);
             }else activeGarden.trim(currentCommand[1]);
         }
-        // append the command text to the paragraph, this will be changed later but it will probably help me debug
-        textArea.appendText(command + "\n");
         this.drawActiveGarden(gc, textArea, rectSize, plotSize);
     }
 
