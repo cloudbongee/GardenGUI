@@ -62,7 +62,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-        newFile = new File("/home/cloudbong/IdeaProjects/GardenGUI/src/main/java/com/gardengui/gardengui/test.in");
+        newFile = new File("/home/cloudbong/IdeaProjects/GardenGUI/src/main/java/com/gardengui/gardengui/finalTest.in");
         scanFile = new Scanner(newFile);
         // the first three lines of the file are meant to represent the information necessary
         rows = Integer.parseInt(scanFile.nextLine().split(" ")[1]);
@@ -70,8 +70,8 @@ public class App extends Application {
         // added the delay as an initial command too
         delay = Double.parseDouble(scanFile.nextLine().split(" ")[1]);
         // setup based on the size of the plot, and the size of a rectangle
-        SIZE_ACROSS = cols * PLOT_SIZE;
-        SIZE_DOWN = rows * PLOT_SIZE;
+        SIZE_ACROSS = rows * PLOT_SIZE;
+        SIZE_DOWN = cols * PLOT_SIZE;
 
         TextArea command = new TextArea();
         GraphicsContext gc = setupStage(primaryStage, SIZE_ACROSS, SIZE_DOWN,

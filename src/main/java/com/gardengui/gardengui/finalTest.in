@@ -1,0 +1,26 @@
+rows: 5
+cols: 7
+delay: .5
+
+plant (3,0) lily
+plant (0,0) bouganvillia
+plant (0,2) elm
+plant (0,1) sunflower
+grow 1 (0,2)
+grow 1 (0,0)
+grow 1 (0,0)
+plant (5,9) tulip
+plant (2,2) oak
+grow 2 oak
+grow 1 tulip
+plant (3,3) tomato
+plant (4,4) lily
+grow 3 lily
+grow 1 (0,0)
+grow 1 (0,0)
+cut (2,2)
+pick
+harvest
+plant (4,6) sunflower
+plant (3,5) sunflower
+grow 1 sunflower

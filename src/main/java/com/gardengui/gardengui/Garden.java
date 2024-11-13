@@ -3,9 +3,7 @@ package com.gardengui.gardengui;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
-import org.w3c.dom.Text;
 
-import java.util.GregorianCalendar;
 import java.util.Map;
 
 import static java.util.Map.entry;
@@ -175,20 +173,21 @@ public class Garden {
 
     // the draw function checks for the whole garden and utilizes the coordinates to represent it in the screen
     public void draw(GraphicsContext gc, int plotSize, int rectSize, Color bg) {
-        for (int i =0; i < this.garden.length; i++) { // traverse the rows
-            for (int j = 0; j < this.garden[i].length; j++) { // traverse the columns
+        for (int i =0; i < rows; i++) { // traverse the rows
+            for (int j = 0; j < cols; j++) { // traverse the columns
                 if(this.garden[i][j] != null) { // if is not null, draw the specified plant
                     this.drawEmptyPlot(i,j,gc,plotSize,rectSize,bg);
                     this.garden[i][j].draw(gc);
                 } else { // else, draw the empty grid
                     this.drawEmptyPlot(i,j,gc,plotSize,rectSize,bg);
                 }}}}
+
     // The draw empty plot creates centered dots where the squares are meant to belong, after clearing the painted position
     private void drawEmptyPlot(int x, int y, GraphicsContext gc, int plotSize, int rectSize, Color bg) {
         gc.clearRect(x * plotSize, y * plotSize, plotSize,plotSize);
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 6; j++){
+        for(int n = 0; n < 6; n++){
+            for(int m = 0; m < 6; m++){
                 gc.setFill(bg);
-                gc.fillRect(x * plotSize + i * Math.floorDiv(plotSize,5) + Math.floorDiv(rectSize,2), y * plotSize + j * Math.floorDiv(plotSize,5) + Math.floorDiv(rectSize,2), 2,2);
+                gc.fillRect(x * plotSize + n * Math.floorDiv(plotSize,5) + Math.floorDiv(rectSize,2), y * plotSize + m * Math.floorDiv(plotSize,5) + Math.floorDiv(rectSize,2), 2,2);
             }}}}
 
