@@ -93,47 +93,69 @@ public class CommandParser {
 
         // return the plant command to the garden
         if(currentCommand[0].equals("PLANT")) {
+            try{
             //TO DO: Pass the plant coordinates to the garden plant command
             int[] coordinates = toCoordinates(currentCommand[1]);
             String plantType = currentCommand[2].trim();
             // pass the coordinates to plant into the array of the garden
             activeGarden.plant(coordinates[0], coordinates[1], plantType, textArea, rectSize, plotSize); }
+            catch(Exception e){
+                textArea.appendText("Invalid plant command");
+            }
+        }
+
         // PRINT COMMAND HAS BEEN SHAVED OFF AS THE GUI IS ACTIVE ALWAYS!!
         else if(currentCommand[0].equals("GROW")){
-            if(currentCommand.length == 1){
-                activeGarden.grow();
+            try {
+                if (currentCommand.length == 1) {
+                    activeGarden.grow();
+                } else if (currentCommand.length == 2) {
+                    // Grow everything by the amount given
+                    activeGarden.grow(Integer.parseInt(currentCommand[1]));
+                } else if (currentCommand[2].contains("(")) {
+                    int[] coordinates = toCoordinates(currentCommand[2]);
+                    // grow on the specific coordinates for the garden class
+                    activeGarden.grow(Integer.parseInt(currentCommand[1]), coordinates[0], coordinates[1], textArea);
+                } else
+                    activeGarden.grow(Integer.parseInt(currentCommand[1]), currentCommand[2]); // pass the name of the plant to grow
+            } catch (RuntimeException e) {
+                textArea.appendText("Invalid grow command \n");
             }
-            else if(currentCommand.length == 2) {
-                // Grow everything by the amount given
-                activeGarden.grow(Integer.parseInt(currentCommand[1]));
-            }
-            else if(currentCommand[2].contains("(")){
-                int[] coordinates  = toCoordinates(currentCommand[2]);
-                // grow on the specific coordinates for the garden class
-                activeGarden.grow(Integer.parseInt(currentCommand[1]), coordinates[0], coordinates[1], textArea);
-            }else activeGarden.grow(Integer.parseInt(currentCommand[1]), currentCommand[2]); // pass the name of the plant to grow
         }
         else if(currentCommand[0].equalsIgnoreCase("HARVEST")){
+            try{
             if(currentCommand.length == 1) {activeGarden.harvest();}// take all the vegetables off
             else if(currentCommand[1].contains("(")){
                 int[] coordinates  = toCoordinates(currentCommand[1]);
                 activeGarden.harvest(coordinates[0], coordinates[1], textArea);
-            }else activeGarden.harvest(currentCommand[1]); }
+            }else activeGarden.harvest(currentCommand[1]); } catch (Exception e) {
+                textArea.appendText("Invalid harvest command\n");
+            }}
 
         else if(currentCommand[0].equalsIgnoreCase("PICK")){
-            if(currentCommand.length == 1) activeGarden.pick(); // pick all flowers
-            else if(currentCommand[1].contains("(")){
-                int[] coordinates = toCoordinates(currentCommand[1]);
-                activeGarden.pick(coordinates[0], coordinates[1], textArea); // pick on coordinates
-            }else activeGarden.pick(currentCommand[1]);
+            try {
+                if (currentCommand.length == 1) activeGarden.pick(); // pick all flowers
+                else if (currentCommand[1].contains("(")) {
+                    int[] coordinates = toCoordinates(currentCommand[1]);
+                    activeGarden.pick(coordinates[0], coordinates[1], textArea); // pick on coordinates
+                } else activeGarden.pick(currentCommand[1]);
+            }
+            catch(Exception e){
+                textArea.appendText("Invalid pick command\n");
+            }
         }
 
         else if(currentCommand[0].equalsIgnoreCase("CUT")){
-            if(currentCommand.length == 1) activeGarden.cut(); // cut for all trees
-            else if(currentCommand[1].contains("(")){
-                int[] coordinates = toCoordinates(currentCommand[1]);
-                activeGarden.cut(coordinates[0], coordinates[1],textArea);
-            }else activeGarden.cut(currentCommand[1]);
+            try {
+                if (currentCommand.length == 1) activeGarden.cut(); // cut for all trees
+                else if (currentCommand[1].contains("(")) {
+                    int[] coordinates = toCoordinates(currentCommand[1]);
+                    activeGarden.cut(coordinates[0], coordinates[1], textArea);
+                } else activeGarden.cut(currentCommand[1]);
+            }
+            catch (Exception e) {
+                textArea.appendText("Invalid cut command\n");
+            }
         }
         else if(currentCommand[0].equalsIgnoreCase("TRIM")){
             if(currentCommand.length == 1) activeGarden.trim(); // cut for all trees
@@ -141,7 +163,7 @@ public class CommandParser {
                 int[] coordinates = toCoordinates(currentCommand[1]);
                 activeGarden.trim(coordinates[0], coordinates[1],textArea);
             }else activeGarden.trim(currentCommand[1]);
-        }
+        }else { textArea.appendText("Unknown command\n");}
         this.drawActiveGarden(gc, textArea, rectSize, plotSize);
     }
 

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b538dca-9e4b-4aee-83cf-0178d771773e" name="Changes" comment="Done. My back hurts somewhat too much for my taste">
+    <list default="true" id="4b538dca-9e4b-4aee-83cf-0178d771773e" name="Changes" comment="Added the changes in text field inputs and column setters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gardengui/gardengui/CommandParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +107,8 @@
       <workItem from="1730341338392" duration="5013000" />
       <workItem from="1730828378155" duration="50000" />
       <workItem from="1731536374336" duration="1222000" />
-      <workItem from="1731542164560" duration="3346000" />
+      <workItem from="1731542164560" duration="5255000" />
+      <workItem from="1731551355085" duration="1424000" />
     </task>
     <task id="LOCAL-00001" summary="yeah">
       <option name="closed" value="true" />
@@ -204,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731541594705</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added the changes in text field inputs and column setters">
+      <option name="closed" value="true" />
+      <created>1731548213856</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1731548213856</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,6 +241,7 @@
     <MESSAGE value="Solved, just being a llittle too pretentious with this whole drawing thng as of now!!&#10;I still don't difure out if pick should or should not work" />
     <MESSAGE value="Finished. Just record a video, maybe change the ord colors to cooler things (&quot;You never know, these greens are too hard to even differentiate from one another&quot;)" />
     <MESSAGE value="Done. My back hurts somewhat too much for my taste" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done. My back hurts somewhat too much for my taste" />
+    <MESSAGE value="Added the changes in text field inputs and column setters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the changes in text field inputs and column setters" />
   </component>
 </project>

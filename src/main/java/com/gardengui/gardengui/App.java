@@ -1,12 +1,6 @@
 package com.gardengui.gardengui;
 
-/*
- * App.java introduces the importations and necessary configurations to run a user interface
- * for the complete Garden.java application.
- * @Author: Jaime Meyer Beilis Michel
- * @Since: October 30 2024
- * Part of the code here was given by Adriana Picoral, for the class CSC210, at the University of Arizona.
- */
+
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -26,10 +20,30 @@ import java.io.FileNotFoundException;
 
 import java.util.Scanner;
 
-/*
-The public class App, inheriting from JavaFX application class, is the main engine for the
-Garden application, this code was provided by Adriana Picoral, for the class CSC210 at the university of Arizona,
-and was modified by Jaime Meyer Beilis Michel based on the instructions given
+/**
+ * <h1>Garden GUI</h1>
+ * App.java introduces the importations and necessary configurations to run a user interface
+ * for the complete Garden.java application.
+ * @Author: Jaime Meyer Beilis Michel
+ * @Since: October 30 2024, Fall 2024 semester, last updated Nov 13 2024
+ * @version: 3.0.1
+ * <h2>Instructions</h2>
+ * After running the gardenGUI App class, a window is shown where the user is supposed to submit the number of rows
+ * and number of columns respectively. <br/>
+ * After having appended and submitted, a window utilizing the dimensions given is created and the user is free
+ * to input commands in the top commandline, and read the commands previously prompted and their analysis in the
+ * bottom text field.
+ * The list of commands available to the user are:
+ * PLANT: the user shall pass a coordinate of the format (row, col) <br/>
+ * GROW: the user shall pass an integer and a coordinate of the format (row, col) <br/>
+ * CUT: the user shall pass a species name, or the user should pass a coordinate <br/>
+ * TRIM:  the user shall pass a species name, or the user should pass a coordinate <br/>
+ * HARVEST:  the user shall pass a species name, or the user should pass a coordinate <br/>
+ * PICK:  the user shall pass a species name, or the user should pass a coordinate <br/>
+ *
+ * After any of the commands have been passed to the application, it will grow a representation of the given
+ * command in the plotting area. <br/>
+ * Happy Gardening!
  */
 public class App extends Application {
 
@@ -55,6 +69,8 @@ public class App extends Application {
     }
 
     public void setUpPrompts(Stage primaryStage) {
+
+        // create a new window's information
         Stage stage = new Stage();
         stage.setTitle("Garden Information");
         BorderPane root = new BorderPane();
@@ -63,19 +79,28 @@ public class App extends Application {
 
         Button submit = new Button("Submit");
         TextField rowField = new TextField();
+        rowField.setText("Row number");
         TextField columnField = new TextField();
+        columnField.setText("Column number");
+
 
         HBox fieldInput = new HBox();
-        fieldInput.getChildren().addAll(rowField, columnField);
-
+        fieldInput.getChildren().add(rowField);
+        fieldInput.getChildren().add(columnField);
         root.setCenter(fieldInput);
         root.setBottom(submit);
 
+        // on the action of pushing the submit button on the first window
         submit.setOnAction(e -> {
+            boolean wasDimensionInvalid;
             try{
-                rows = Integer.parseInt(rowField.getText());
-                cols = Integer.parseInt(columnField.getText());
+                // define the rows and columns
+                cols = Integer.parseInt(rowField.getText());
+                rows = Integer.parseInt(columnField.getText());
+                wasDimensionInvalid = false;
             } catch (NumberFormatException ex){
+                wasDimensionInvalid = true;
+                // otherwise, define a default
                 System.out.println("Rows and Cols must be an integer, defaulting to 5 x 5");
                 rows = 5;
                 cols = 5;
@@ -84,14 +109,12 @@ public class App extends Application {
             // close the current prompt
             stage.close();
             // call the primaryStage
-            showMain(primaryStage);
+            showMain(primaryStage, wasDimensionInvalid);
         });
-
-
         stage.show();
     }
 
-    public void showMain(Stage primaryStage){
+    public void showMain(Stage primaryStage, boolean wasDimensionInvalid){
         SIZE_ACROSS = rows * PLOT_SIZE;
         SIZE_DOWN = cols * PLOT_SIZE;
 
@@ -105,6 +128,7 @@ public class App extends Application {
         commandLineElements.getChildren().addAll(commandLine, addCommand);
 
         TextArea command = new TextArea();
+        if(wasDimensionInvalid) command.appendText("Dimensions inputted were Invalid, defaulted to 5 x 5");
         GraphicsContext gc = setupStage(primaryStage, SIZE_ACROSS, SIZE_DOWN,
                 command, commandLineElements);
 
